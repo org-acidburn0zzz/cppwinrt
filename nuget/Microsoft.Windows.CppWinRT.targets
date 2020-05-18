@@ -629,7 +629,7 @@ $(XamlMetaDataProviderPch)
       <Midl Condition="'$(CppWinRTModernIDL)' != 'false'">
         <AdditionalMetadataDirectories Condition="'%(AdditionalMetadataDirectories)' == '' And '$(WindowsSDK_MetadataFoundationPath)' != ''">$(WindowsSDK_MetadataFoundationPath);%(AdditionalMetadataDirectories)</AdditionalMetadataDirectories>
         <AdditionalMetadataDirectories Condition="'%(AdditionalMetadataDirectories)' == '' And '$(WindowsSDK_MetadataFoundationPath)' == ''">$(WindowsSDK_MetadataPath);%(AdditionalMetadataDirectories)</AdditionalMetadataDirectories>
-        <AdditionalOptions>%(AdditionalOptions) /nomidl</AdditionalOptions>
+        <AdditionalOptions>%(AdditionalOptions) /nomidl /no_cpp</AdditionalOptions>
       </Midl>
       <Link>
         <AdditionalDependencies Condition="'$(CppWinRTLibs)' != 'false'">%(AdditionalDependencies);WindowsApp.lib</AdditionalDependencies>
