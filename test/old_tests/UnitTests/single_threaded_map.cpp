@@ -28,7 +28,6 @@ namespace
         values.Insert(2,20);
         values.Insert(3,30);
         IIterator<IKeyValuePair<int, int>> first = values.First();
-        REQUIRE(!values.TryRemove(999)); // failed removal does not invalidate
         REQUIRE(first.HasCurrent());
         [[maybe_unused]] auto pair = first.Current();
         REQUIRE(first.MoveNext());
@@ -53,8 +52,7 @@ namespace
         REQUIRE(!values.Insert(2, 20));
         compare(values, { { 1,100 }, {2,20} });
 
-        REQUIRE_THROWS_AS(values.Remove(3), hresult_out_of_bounds);
-        REQUIRE(!values.TryRemove(3));
+        values.Remove(3);
         compare(values, { { 1,100 },{ 2,20 } });
         values.Remove(2);
         compare(values, { { 1,100 } });
@@ -67,7 +65,7 @@ namespace
         compare(values, {});
 
         test_invalidation(values, [&] { values.Clear(); });
-        test_invalidation(values, [&] { values.Remove(1); });
+        test_invalidation(values, [&] { values.Remove(10); });
         test_invalidation(values, [&] { values.Insert(1,10); });
     }
 }
